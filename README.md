@@ -1,0 +1,3 @@
+# NN
+OneLayer is a simple NN with 1 input nueron 1 weight and 1 output nueron. It is very basic and works with a genetic algorithm.
+Play around with the number of Epochs...
