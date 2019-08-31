@@ -1,5 +1,12 @@
 import numpy as np
 import random
+import statistics as s
+import matplotlib.pyplot as plt
+
+fig = plt.figure()
+
+ax = fig.add_subplot(111)
+
 train_input = [1,2,3,4,5,6,7,8,9]
 
 train_output = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9]
@@ -15,16 +22,31 @@ print("How many Epochs?")
 
 EPOCH = int(input())
 
+loss_plot = []
+
+loss_fig = []
+
+gen = []
+
 loss_list = []
-for i in range(0,EPOCH-1):
+for m in range(0,EPOCH-1):
 	for i in range(0,len(train_output)-1):
 		sample_out  = train_input[i]*w_array[0][0]
 		loss = abs(sample_out - train_output[i])
 		#print(sample_out,loss,train_output[i])
+		loss_plot.append(loss)
 		loss_list.append([loss,w_array[0][0]])
 		w_array = np.random.rand(1,1)
 		#get the least amount of loss
+	loss_fig.append(min(loss_plot))
+	gen.append(m)
+	
 	w_array = np.array([[min(loss_list)[1]]])
 	#print(w_array)	
 for i in range(0,len(test_list)-1):
 	print(test_val[i],test_list[i]*w_array[0][0])
+
+ax.scatter(gen,loss_fig)
+ax.plot(gen,loss_fig)
+
+plt.show()
